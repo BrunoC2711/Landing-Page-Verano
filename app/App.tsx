@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,9 +36,39 @@ body{margin:0; color:var(--ink); background:var(--sand)}
 .links a:hover{opacity:1}
 
 /* HERO */
-.hero{position:relative; min-height:70svh; display:grid; align-items:end; background:
-  linear-gradient(to bottom, rgba(255,255,255,.2), var(--sand) 80%),
-  url('https://images.unsplash.com/photo-1518607733275-8f162f1e1131?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat;}
+.hero {
+  position: relative;
+  min-height: 70svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+/* Imagem com blur no fundo (expandida) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('./imgs/verano.jpeg') center/cover no-repeat;
+  filter: blur(20px);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+/* Imagem nítida no centro (tamanho original) */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('./imgs/verano.jpeg') center/contain no-repeat;
+  z-index: 1;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
 .hero-wrap{padding:72px 0 24px}
 .badge{width:110px;height:110px;border-radius:50%;backdrop-filter:blur(6px);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.12);transform:translateY(-20px)}
 .badge span{letter-spacing:.35em;color:#6b3f3f}
@@ -73,9 +103,9 @@ body{margin:0; color:var(--ink); background:var(--sand)}
 `;
 
 const produtos = [
-  { id: 1, nome: "Top Cortininha Areia", preco: "R$ 129", img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop" },
-  { id: 2, nome: "Calcinha Hot Pant Sálvia", preco: "R$ 119", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4804?q=80&w=1200&auto=format&fit=crop" },
-  { id: 3, nome: "Top Tomara‑que‑caia Terracota", preco: "R$ 149", img: "https://images.unsplash.com/photo-1603354350317-6f7aaa5911f6?q=80&w=1200&auto=format&fit=crop" },
+  { id: 1, nome: "Maiô Tulum - Reggae", preco: "R$ 55", preco_com_desconto: "R$ 53", img: "/imgs/reggae.jpeg" },
+  { id: 2, nome: "Biquíni Ibiza - Preto", preco: "R$ 51,9", preco_com_desconto: "R$ 49,9", img: "/imgs/ibiza.jpeg" },
+  { id: 3, nome: "Biquíni Tulum - Chocolate com marrom", preco: "R$ 64", preco_com_desconto: "R$ 62", img: "/imgs/tulum.jpeg" },
 ];
 
 function Nav(){
@@ -83,11 +113,7 @@ function Nav(){
     <div className="nav">
       <div className="container inner">
         <div className="brand">
-          <div className="badge" style={{width:38,height:38,borderRadius:"50%",display:"grid",placeItems:"center",border:"1px solid rgba(0,0,0,.08)",background:"#fff"}}>
-            <span style={{fontSize:10,letterSpacing:".28em"}}>VR</span>
-          </div>
           <span>VERANO</span>
-          <span className="brand-badge">SWIM</span>
         </div>
         <div className="links">
           <a href="#colecoes">Coleções</a>
@@ -95,7 +121,7 @@ function Nav(){
           <a href="#contato">Contato</a>
         </div>
         <Button asChild>
-          <a href="https://wa.me/5599999999999" target="_blank" rel="noreferrer">Comprar no WhatsApp</a>
+          <a href="https://wa.me/5585997056311" target="_blank" rel="noreferrer">Comprar no WhatsApp</a>
         </Button>
       </div>
     </div>
@@ -107,11 +133,12 @@ function Hero(){
     <section className="hero">
       <div className="container hero-wrap">
         <div className="badge"><span>VERANO</span></div>
+        {/* <img src="/imgs/logo.png" alt="Logo Verano" style={{height:60, marginTop:-40, marginBottom:10}} /> */}
         <h1 className="fadeup">Beachwear atemporal, conforto que abraça.</h1>
         <p className="fadeup d2">Biquínis com modelagens pensadas para diferentes corpos. Proteção UV50+, forro duplo e cartela de cores inspirada no litoral.</p>
         <div className="hero-actions fadeup d3">
           <Button asChild>
-            <a href="https://wa.me/5599999999999" target="_blank" rel="noreferrer">Comprar agora</a>
+            <a href="https://wa.me/5585997056311" target="_blank" rel="noreferrer">Comprar agora</a>
           </Button>
           <Button variant="secondary" asChild>
             <a href="#colecoes">Ver coleções</a>
@@ -147,34 +174,42 @@ function Colecoes(){
 
     {/* Conteúdo do Card */}
     <div className="p-5 space-y-4">
-      {/* Header com Nome e Preço */}
+      {/* Header com Nome e Preços */}
       <div className="space-y-2">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-semibold text-lg leading-tight text-gray-900 line-clamp-2">
-            {p.nome}
-          </h3>
-          <Badge className="shrink-0 bg-black hover:bg-gray-900 text-white font-bold px-3 py-1 text-sm shadow-md">
-            {p.preco}
-          </Badge>
+        <h3 className="font-semibold text-lg leading-tight text-gray-900 line-clamp-2">
+          {p.nome}
+        </h3>
+        
+        {/* Preços */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-baseline gap-2">
+            <span className="text-xs text-gray-500 line-through">
+              {p.preco}
+            </span>
+            <Badge className="bg-black hover:bg-gray-900 text-white font-bold px-3 py-1 text-sm shadow-md">
+              {p.preco_com_desconto}
+            </Badge>
+          </div>
+          <span className="text-xs text-gray-600 font-medium">
+            💰 à vista/dinheiro
+          </span>
         </div>
       </div>
 
-      {/* Tamanhos e Botão */}
-      <div className="flex items-center justify-between gap-4 pt-2 border-t border-gray-100">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-            Tamanhos:
-          </span>
-          <div className="flex gap-1.5">
-            {['PP', 'P', 'M', 'G'].map(tamanho => (
-              <span 
-                key={tamanho}
-                className="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded"
-              >
-                {tamanho}
-              </span>
-            ))}
-          </div>
+      {/* Tamanhos */}
+      <div className="flex items-center gap-2 pt-2 border-t border-gray-100">
+        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+          Tamanhos:
+        </span>
+        <div className="flex gap-1.5">
+          {['PP', 'P', 'M', 'G'].map(tamanho => (
+            <span 
+              key={tamanho}
+              className="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded"
+            >
+              {tamanho}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -184,7 +219,7 @@ function Colecoes(){
         className="w-full bg-black hover:bg-gray-900 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
       >
         <a 
-          href={`https://wa.me/5599999999999?text=Oi%2C%20quero%20o%20${encodeURIComponent(p.nome)}`} 
+          href={`https://wa.me/5585997056311?text=Oi%2C%20quero%20o%20${encodeURIComponent(p.nome)}`} 
           target="_blank" 
           rel="noreferrer"
           className="flex items-center justify-center gap-2"
@@ -268,7 +303,7 @@ function Contato(){
               <div style={{display:"flex", gap:10, gridColumn:"1 / -1"}}>
                 <Button>Enviar</Button>
                 <Button variant="secondary" asChild>
-                  <a href="https://wa.me/5599999999999" target="_blank" rel="noreferrer">WhatsApp</a>
+                  <a href="https://wa.me/5585997056311" target="_blank" rel="noreferrer">WhatsApp</a>
                 </Button>
                 <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
@@ -291,11 +326,18 @@ function Contato(){
 }
 
 function Footer(){
-  const y = new Date().getFullYear();
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="footer">
       <div className="container footer-row">
-        <small style={{opacity:.8}}>© {y} Verano Swim. Todos os direitos reservados.</small>
+        <small style={{opacity:.8}}>
+          © {year ?? ""} Verano. Todos os direitos reservados.
+        </small>
         <div style={{display:"flex", gap:14}}>
           <a href="#guia" style={{opacity:.8, textDecoration:"none", color:"inherit"}}>Guia</a>
           <a href="#contato" style={{opacity:.8, textDecoration:"none", color:"inherit"}}>Contato</a>
