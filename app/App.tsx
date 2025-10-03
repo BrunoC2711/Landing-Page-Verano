@@ -46,30 +46,9 @@ body{margin:0; color:var(--ink); background:var(--sand)}
 }
 
 /* Imagem com blur no fundo (expandida) */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('./imgs/verano.jpeg') center/cover no-repeat;
-  filter: blur(20px);
-  transform: scale(1.1);
-  z-index: 0;
-}
-
-/* Imagem nítida no centro (tamanho original) */
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('./imgs/verano.jpeg') center/contain no-repeat;
-  z-index: 1;
-}
-
-.hero > * {
-  position: relative;
-  z-index: 2;
-}
-.hero-wrap{padding:72px 0 24px}
+.hero{position:relative; min-height:70svh; display:grid; align-items:end; background:
+  linear-gradient(to bottom, rgba(255,255,255,.2), var(--sand) 80%);}
+.hero-wrap{padding:72px 10px 24px}
 .badge{width:110px;height:110px;border-radius:50%;backdrop-filter:blur(6px);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.12);transform:translateY(-20px)}
 .badge span{letter-spacing:.35em;color:#6b3f3f}
 .hero h1{font-family: ui-serif, Georgia, serif; font-size:44px; line-height:1.12; margin:10px 0 6px; color:#6b3f3f}
@@ -118,7 +97,7 @@ function Nav(){
         <div className="links">
           <a href="#colecoes">Coleções</a>
           <a href="#guia">Guia</a>
-          <a href="#contato">Contato</a>
+          {/* <a href="#contato">Contato</a> */}
         </div>
         <Button asChild>
           <a href="https://wa.me/5585997056311" target="_blank" rel="noreferrer">Comprar no WhatsApp</a>
@@ -132,8 +111,8 @@ function Hero(){
   return (
     <section className="hero">
       <div className="container hero-wrap">
-        <div className="badge"><span>VERANO</span></div>
-        {/* <img src="/imgs/logo.png" alt="Logo Verano" style={{height:60, marginTop:-40, marginBottom:10}} /> */}
+        {/* <div className="badge"><span>VERANO</span></div> */}
+        <img src="/imgs/verano.jpeg" alt="Logo Verano" style={{height:90, marginTop:-40, marginBottom:10, borderRadius: '50%'}} />
         <h1 className="fadeup">Beachwear atemporal, conforto que abraça.</h1>
         <p className="fadeup d2">Biquínis com modelagens pensadas para diferentes corpos. Proteção UV50+, forro duplo e cartela de cores inspirada no litoral.</p>
         <div className="hero-actions fadeup d3">
@@ -287,43 +266,43 @@ function Guia(){
   );
 }
 
-function Contato(){
-  const [open, setOpen] = useState(false);
-  return (
-    <section id="contato" className="section">
-      <div className="container" style={{maxWidth:760}}>
-        <h2>Contato</h2>
-        <Card>
-          <CardContent style={{paddingTop:20}}>
-            <div style={{display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:12}}>
-              <Input placeholder="Seu nome" />
-              <Input placeholder="Seu e-mail" type="email" />
-              <Input placeholder="Assunto" style={{gridColumn:"1 / -1"}} />
-              <Textarea placeholder="Mensagem" rows={4} style={{gridColumn:"1 / -1"}} />
-              <div style={{display:"flex", gap:10, gridColumn:"1 / -1"}}>
-                <Button>Enviar</Button>
-                <Button variant="secondary" asChild>
-                  <a href="https://wa.me/5585997056311" target="_blank" rel="noreferrer">WhatsApp</a>
-                </Button>
-                <Dialog open={open} onOpenChange={setOpen}>
-                  <DialogTrigger asChild>
-                    <Button variant="ghost">Política</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Política de Privacidade</DialogTitle>
-                      <DialogDescription>Usamos suas informações apenas para contato e suporte. Não compartilhamos dados com terceiros.</DialogDescription>
-                    </DialogHeader>
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </section>
-  );
-}
+// function Contato(){
+//   const [open, setOpen] = useState(false);
+//   return (
+//     <section id="contato" className="section">
+//       <div className="container" style={{maxWidth:760}}>
+//         <h2>Contato</h2>
+//         <Card>
+//           <CardContent style={{paddingTop:20}}>
+//             <div style={{display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:12}}>
+//               <Input placeholder="Seu nome" />
+//               <Input placeholder="Seu e-mail" type="email" />
+//               <Input placeholder="Assunto" style={{gridColumn:"1 / -1"}} />
+//               <Textarea placeholder="Mensagem" rows={4} style={{gridColumn:"1 / -1"}} />
+//               <div style={{display:"flex", gap:10, gridColumn:"1 / -1"}}>
+//                 <Button>Enviar</Button>
+//                 <Button variant="secondary" asChild>
+//                   <a href="https://wa.me/5585997056311" target="_blank" rel="noreferrer">WhatsApp</a>
+//                 </Button>
+//                 <Dialog open={open} onOpenChange={setOpen}>
+//                   <DialogTrigger asChild>
+//                     <Button variant="ghost">Política</Button>
+//                   </DialogTrigger>
+//                   <DialogContent>
+//                     <DialogHeader>
+//                       <DialogTitle>Política de Privacidade</DialogTitle>
+//                       <DialogDescription>Usamos suas informações apenas para contato e suporte. Não compartilhamos dados com terceiros.</DialogDescription>
+//                     </DialogHeader>
+//                   </DialogContent>
+//                 </Dialog>
+//               </div>
+//             </div>
+//           </CardContent>
+//         </Card>
+//       </div>
+//     </section>
+//   );
+// }
 
 function Footer(){
   const [year, setYear] = useState<number | null>(null);
@@ -340,7 +319,7 @@ function Footer(){
         </small>
         <div style={{display:"flex", gap:14}}>
           <a href="#guia" style={{opacity:.8, textDecoration:"none", color:"inherit"}}>Guia</a>
-          <a href="#contato" style={{opacity:.8, textDecoration:"none", color:"inherit"}}>Contato</a>
+          {/* <a href="#contato" style={{opacity:.8, textDecoration:"none", color:"inherit"}}>Contato</a> */}
         </div>
       </div>
     </footer>
@@ -355,7 +334,7 @@ export default function App(){
       <Hero />
       <Colecoes />
       <Guia />
-      <Contato />
+      {/* <Contato /> */}
       <Footer />
     </div>
   );
