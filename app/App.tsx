@@ -230,27 +230,12 @@ body{margin:0; color:var(--ink); background:var(--sand)}
 `;
 
 const produtos = [
-  { id: 4, nome: "Verano", img: "/imgs/0.jpeg" },
-  { id: 5, nome: "Verano", img: "/imgs/1.jpeg" },
-  { id: 6, nome: "Verano", img: "/imgs/2.jpeg" },
-  { id: 7, nome: "Verano", img: "/imgs/3.jpeg" },
-  { id: 8, nome: "Verano", img: "/imgs/4.jpeg" },
-  { id: 9, nome: "Verano", img: "/imgs/5.jpeg" },
-  { id: 10, nome: "Verano", img: "/imgs/6.jpeg" },
-  { id: 11, nome: "Verano", img: "/imgs/7.jpeg" },
-  { id: 12, nome: "Verano", img: "/imgs/8.jpeg" },
-  { id: 13, nome: "Verano", img: "/imgs/9.jpeg" },
-  { id: 14, nome: "Verano", img: "/imgs/10.jpeg" },
-  { id: 15, nome: "Verano", img: "/imgs/11.jpeg" },
-  { id: 16, nome: "Verano", img: "/imgs/12.jpeg" },
-  { id: 17, nome: "Verano", img: "/imgs/13.jpeg" },
-  { id: 18, nome: "Verano", img: "/imgs/14.jpeg" },
-  { id: 19, nome: "Verano", img: "/imgs/15.jpeg" },
-  { id: 20, nome: "Verano", img: "/imgs/16.jpeg" },
-  { id: 1, nome: "Maiô Tulum - Reggae", img: "/imgs/reggae.jpeg" },
-  { id: 2, nome: "Biquíni Ibiza - Preto", img: "/imgs/ibiza.jpeg" },
-  { id: 3, nome: "Biquíni Tulum - Chocolate com marrom", img: "/imgs/tulum.jpeg" },
-  { id: 21, nome: "Verano", img: "/imgs/17.jpeg" }
+  { id: 1, nome: "Verano_1", img: "/imgs/1.jpeg" },
+  { id: 2, nome: "Verano_2", img: "/imgs/2.jpeg" },
+  { id: 3, nome: "Verano_3", img: "/imgs/3.jpeg" },
+  { id: 4, nome: "Verano_4", img: "/imgs/4.jpeg" },
+  { id: 5, nome: "Verano_5", img: "/imgs/5.jpeg" },
+  { id: 6, nome: "Verano_6", img: "/imgs/6.jpeg" },
 ];
 
 const benefits = [
@@ -341,7 +326,7 @@ function Colecoes(){
             {produtos.map((p) => (
               <CarouselItem key={p.id} className="basis-full md:basis-1/2 lg:basis-1/3">
                 <a 
-                  href={`https://wa.me/5585997056311?text=${encodeURIComponent('Oi, gostaria de saber mais sobre os biquínis Verano')}`}
+                  href={`https://wa.me/5585997056311?text=${encodeURIComponent('Oi, quero fazer meu pedido com a Verano! 💖')}`}
                   target="_blank"
                   rel="noreferrer"
                   className="group overflow-hidden rounded-lg fadeup h-full block"
@@ -446,20 +431,10 @@ function Guia(){
           <Card>
             <CardHeader><CardTitle>Como medir</CardTitle></CardHeader>
             <CardContent style={{opacity:.9, fontSize:14, lineHeight:1.6}}>
-              • Busto: fita contorna a parte mais alta.<br/>
-              • Cintura: parte mais fina do tronco.<br/>
-              • Quadril: contorne a parte mais larga.<br/>
-              Dica: mantenha a fita paralela ao chão.
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader><CardTitle>Tabela rápida</CardTitle></CardHeader>
-            <CardContent>
-              <div className="table">
-                <div className="head">Tamanho</div><div>PP</div><div>P</div><div>M</div>
-                <div className="head">Busto (cm)</div><div>78–84</div><div>85–90</div><div>91–96</div>
-                <div className="head">Quadril (cm)</div><div>86–92</div><div>93–98</div><div>99–104</div>
-              </div>
+              ⮕ Se você usa tamanho 34/36, compre tamanho P<br/>
+              ⮕ Se você usa tamanho 36/38, compre tamanho M<br/>
+              ⮕ Se você usa tamanho 40, compre tamanho G<br/>
+              ⮕ Se você usa tamanho 42, compre tamanho GG<br/>
             </CardContent>
           </Card>
         </div>
@@ -475,7 +450,7 @@ function Guia(){
           </AccordionItem>
           <AccordionItem value="frete">
             <AccordionTrigger>Como é o frete?</AccordionTrigger>
-            <AccordionContent>Frete grátis para Fortaleza. Outras cidades: valor calculado no WhatsApp. Entrega em até 48h úteis.</AccordionContent>
+            <AccordionContent>Entregas realizadas pela Uber flash. Opções de retirada: bairro aerolandia, josé walter e aldeota.</AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
@@ -499,7 +474,7 @@ function Footer(){
         <div style={{display:"flex", gap:20, alignItems:"center"}}>
           <a href="#beneficios" style={{opacity:.8, textDecoration:"none", color:"inherit"}}>Beneficios</a>
           <a 
-            href="https://wa.me/5585997056311?text=Oi%2C%20gostaria%20de%20saber%20mais%20sobre%20Verano" 
+            href={`https://wa.me/5585997056311?text=${encodeURIComponent('Oi, quero fazer meu pedido com a Verano! 💖')}`}
             target="_blank" 
             rel="noreferrer"
             title="WhatsApp"
