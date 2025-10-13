@@ -432,7 +432,7 @@ function Guia(){
             <CardHeader><CardTitle>Como medir</CardTitle></CardHeader>
             <CardContent style={{opacity:.9, fontSize:14, lineHeight:1.6}}>
               ⮕ Se você usa tamanho 34/36, compre tamanho P<br/>
-              ⮕ Se você usa tamanho 36/38, compre tamanho M<br/>
+              ⮕ Se você usa tamanho 38, compre tamanho M<br/>
               ⮕ Se você usa tamanho 40, compre tamanho G<br/>
               ⮕ Se você usa tamanho 42, compre tamanho GG<br/>
             </CardContent>
@@ -450,7 +450,7 @@ function Guia(){
           </AccordionItem>
           <AccordionItem value="frete">
             <AccordionTrigger>Como é o frete?</AccordionTrigger>
-            <AccordionContent>Entregas realizadas pela Uber flash. Opções de retirada: bairro aerolandia, josé walter e aldeota.</AccordionContent>
+            <AccordionContent>Entregas realizadas pela Uber flash. Opções de retirada: Bairro Aerolândia, José Walter e Aldeota.</AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
